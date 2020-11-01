@@ -2,7 +2,7 @@ import logging
 
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.linear_model import LinearRegression
-
+from sklearn.ensemble import RandomForestRegressor
 
 def create_features(df_stock, nlags=10):
     df_resampled = df_stock.copy()
@@ -25,9 +25,12 @@ def create_X_Y(df_lags):
 
 class Stock_model(BaseEstimator, TransformerMixin):
 
-    def __init__(self, data_fetcher):
+    def __init__(self, data_fetcher, model_type):
         self.log = logging.getLogger()
-        self.lr = LinearRegression()
+        if model_type == "linear regression":
+            self.mod = LinearRegression()
+        elif model_type == "random forest regressor":
+            self.mod = RandomForestRegressor()
         self._data_fetcher = data_fetcher
         self.log.warning('here')
 
@@ -35,7 +38,7 @@ class Stock_model(BaseEstimator, TransformerMixin):
         data = self._data_fetcher(X)
         df_features = create_features(data)
         df_features, Y = create_X_Y(df_features)
-        self.lr.fit(df_features, Y)
+        self.mod.fit(df_features, Y)
         return self
 
     def predict(self, X, Y=None):
@@ -45,6 +48,6 @@ class Stock_model(BaseEstimator, TransformerMixin):
         df_features = create_features(data)
         print(df_features)
         df_features, Y = create_X_Y(df_features)
-        predictions = self.lr.predict(df_features)
+        predictions = self.mod.predict(df_features)
 
         return predictions.flatten()[-1]
