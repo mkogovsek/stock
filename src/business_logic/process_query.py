@@ -10,7 +10,7 @@ from src.algo.dummy_model import Stock_model
 
 def create_business_logic():
     data_fetcher = get_last_stock_price
-    stock_mod = Stock_model(data_fetcher, "random forest regressor")
+    stock_mod = Stock_model(data_fetcher, "linear regression")
     busi_log = BusinessLogic(stock_mod)
     return busi_log
 
