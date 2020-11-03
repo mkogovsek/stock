@@ -1,9 +1,9 @@
 from flask import Flask
 
 from src.business_logic.process_query import create_business_logic
+from src.business_logic.process_query import BusinessLogic
 
 app = Flask(__name__)
-
 
 @app.route('/', methods=['GET'])
 def hello():
@@ -12,10 +12,11 @@ def hello():
 
 @app.route('/get_stock_val/<ticker>', methods=['GET'])
 def get_stock_value(ticker):
-    bl = create_business_logic()
-    prediction = bl.do_predictions_for(ticker)
-
-    return f'{prediction}\n'
+    createbl = create_business_logic()
+    applybl = BusinessLogic(ticker)
+    prediction = createbl.do_predictions_for(ticker)
+    buyorsellreco = applybl.classificationbuysell(ticker)
+    return f'Tomorrow, we predict a value of: {prediction}$.\n We recommend to {buyorsellreco}\n'
 
 
 if __name__ == '__main__':
