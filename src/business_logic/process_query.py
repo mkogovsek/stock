@@ -59,9 +59,9 @@ class BusinessLogic:
         print(f'tickerpred value:\n {tickerpred}')
         print(f'tickerclose value:\n {todayclose.iloc[0,0]}')
         if tickerpred - todayclose.iloc[0,0] > 0:
-            buysellclass = f'SELL, because {todayclose.iloc[0,0]} $ is lesser than tomorrow predicted stock value.'
+            buysellclass = f'BUY, because {todayclose.iloc[0,0]} $ is lesser than tomorrow predicted stock value.'
             #buy = 0
         else:
-            buysellclass = f'BUY, because {todayclose.iloc[0,0]} $ is higher than tomorrow predicted stock value.'
+            buysellclass = f'SELL, because {todayclose.iloc[0,0]} $ is higher than tomorrow predicted stock value.'
             #buy = 1
         return buysellclass
