@@ -16,7 +16,8 @@ def get_stock_value(ticker):
     applybl = BusinessLogic(ticker)
     prediction = createbl.do_predictions_for(ticker)
     buyorsellreco = applybl.classificationbuysell(ticker)
-    return f'Tomorrow, we predict a value of: {prediction}$.\n We recommend to {buyorsellreco}\n'
+    #return f'Tomorrow, we predict a value of: {prediction}$.\n We recommend to {buyorsellreco}\n'
+    return buyorsellreco
 
 
 if __name__ == '__main__':

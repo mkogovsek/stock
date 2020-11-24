@@ -51,3 +51,5 @@ class Stock_model(BaseEstimator, TransformerMixin):
         predictions = self.mod.predict(df_features)
 
         return predictions.flatten()[-1]
+
+

@@ -10,7 +10,7 @@ from src.algo.dummy_model import Stock_model
 
 def create_business_logic():
     data_fetcher = get_last_stock_price
-    stock_mod = Stock_model(data_fetcher, "random forest regressor")
+    stock_mod = Stock_model(data_fetcher, "linear regression")
     busi_log = BusinessLogic(stock_mod)
     return busi_log
 
@@ -59,9 +59,11 @@ class BusinessLogic:
         print(f'tickerpred value:\n {tickerpred}')
         print(f'tickerclose value:\n {todayclose.iloc[0,0]}')
         if tickerpred - todayclose.iloc[0,0] > 0:
-            buysellclass = f'BUY, because {todayclose.iloc[0,0]} $ is lesser than tomorrow predicted stock value.'
+            buysellclass = 'BUY'
+            #buysellclass = f'BUY, because {todayclose.iloc[0,0]} $ is lesser than tomorrow predicted stock value.'
             #buy = 0
         else:
-            buysellclass = f'SELL, because {todayclose.iloc[0,0]} $ is higher than tomorrow predicted stock value.'
+            buysellclass = 'SELL'
+            #buysellclass = f'SELL, because {todayclose.iloc[0,0]} $ is higher than tomorrow predicted stock value.'
             #buy = 1
         return buysellclass
